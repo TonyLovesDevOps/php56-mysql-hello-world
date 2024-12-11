@@ -14,6 +14,7 @@
     $link = mysql_connect("db", "root", "my-secret-pw")
         or die("Could not connect: " . mysql_error());
     print ("Connected successfully");
+		echo "<br />";
 		$set = mysql_query('SHOW DATABASES;');
 		$dbs = array();
 		while ($db = mysql_fetch_row($set))
@@ -21,6 +22,10 @@
    		$dbs[] = $db[0];
 		}
 		echo implode('<br/>', $dbs);
+		# Run a query to retrieve the mysql version and print it out
+		$result = mysql_query("SELECT version()");
+		$row = mysql_fetch_row($result);
+		echo "MySQL version: " . $row[0];
     mysql_close($link);
 		?>
 	<h2>PHP Information</h2> 
