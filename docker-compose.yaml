@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mysql:5.7
+    # image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "my-secret-pw"
+      MYSQL_DATABASE: "php"
+      MYSQL_USER: "foo"
+      MYSQL_PASSWORD: "barbazquux"
+
+  php:
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
